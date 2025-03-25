@@ -1,3 +1,17 @@
+function setup_space {
+  local idx="$1"
+  local name="$2"
+  local space=
+  echo "setup space $idx : $name"
+
+  space=$(yabai -m query --spaces --space "$idx")
+  if [ -z "$space" ]; then
+    yabai -m space --create
+  fi
+
+  yabai -m space "$idx" --label "$name"
+}
+
 yabai -m config layout bsp
 yabai -m config window_placement second_child
 
@@ -20,5 +34,25 @@ yabai -m config window_opacity on
 yabai -m config active_window_opacity 1.0
 yabai -m config normal_window_opacity 0.5
 
+setup_space 1 web
+setup_space 2 code
+setup_space 3 chat
+setup_space 4 music
+setup_space 5 studying
+setup_space 6 gaming
+setup_space 7 web_other
+
 yabai -m rule --add app="^Musiikki$" manage=off
 yabai -m rule --add app="^Discord$" manage=off
+yabai -m rule --add app="^Finder$" manage=off
+yabai -m rule --add app="^Järjestelmäasetukset$" manage=off
+
+yabai -m rule --add app="^Edge$" space=1
+yabai -m rule --add app="^Discord$" space=3
+yabai -m rule --add app="^Muistiinpanot$" space=4
+yabai -m rule --add app="^IntelliJ Idea$" space=2
+yabai -m rule --add app="^Firefox$" space=7
+yabai -m rule --add app="^Musiikki$" space=4
+yabai -m rule --add app="^iTerm2$" space=2
+yabai -m rule --add app="^Code$" space=2
+yabai -m rule --add app="^Safari$" space=7
