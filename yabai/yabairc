@@ -19,8 +19,9 @@ yabai -m config top_padding       0
 yabai -m config bottom_padding    0
 yabai -m config left_padding      0
 yabai -m config right_padding     0
- 
 
+yabai -m config menubar_opacity 1.0
+ 
 yabai -m config auto_balance off
 yabai -m config split_ratio 0.5
 
@@ -42,10 +43,14 @@ setup_space 5 studying
 setup_space 6 gaming
 setup_space 7 web_other
 
+yabai -m config --space 6 layout float
+
 yabai -m rule --add app="^Musiikki$" manage=off
 yabai -m rule --add app="^Discord$" manage=off
 yabai -m rule --add app="^Finder$" manage=off
 yabai -m rule --add app="^Järjestelmäasetukset$" manage=off
+yabai -m rule --add app="^Kalenteri$" manage=off
+yabai -m rule --add app="^Shottr$" manage=off
 
 yabai -m rule --add app="^Edge$" space=1
 yabai -m rule --add app="^Discord$" space=3
@@ -56,3 +61,16 @@ yabai -m rule --add app="^Musiikki$" space=4
 yabai -m rule --add app="^iTerm2$" space=2
 yabai -m rule --add app="^Code$" space=2
 yabai -m rule --add app="^Safari$" space=7
+yabai -m rule --add app="^Minecraft Launcher$" space=6q
+
+yabai -m signal --add event=mission_control_exit action='echo "refresh" | nc -U /tmp/yabaispacemanager.socket'
+yabai -m signal --add event=display_added action='echo "refresh" | nc -U /tmp/yabaispacemanager.socket'code
+yabai -m signal --add event=display_removed action='echo "refresh" | nc -U /tmp/yabaispacemanager.socket'
+yabai -m signal --add event=window_created action='echo "refresh" | nc -U /tmp/yabaispacemanager.socket'
+yabai -m signal --add event=window_destroyed action='echo "refresh" | nc -U /tmp/yabaispacemanager.socket'
+yabai -m signal --add event=window_focused action='echo "refresh" | nc -U /tmp/yabaispacemanager.socket'
+yabai -m signal --add event=window_moved action='echo "refresh" | nc -U /tmp/yabaispacemanager.socket'
+yabai -m signal --add event=window_resized action='echo "refresh" | nc -U /tmp/yabaispacemanager.socket'
+yabai -m signal --add event=window_minimized action='echo "refresh" | nc -U /tmp/yabaispacemanager.socket'
+yabai -m signal --add event=window_deminimized action='echo "refresh" | nc -U /tmp/yabaispacemanager.socket'
+
